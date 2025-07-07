@@ -11,6 +11,7 @@ public:
 
 	void Init() override;
 	void Enter() override;
+	void Update(float dt) override;
 
 };
 
