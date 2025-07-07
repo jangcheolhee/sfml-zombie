@@ -5,6 +5,7 @@ class Zombie;
 class SceneGame : public Scene
 {
 protected:
+	sf::Sprite cursor;
 	Player* player;
 	std::list<Zombie*> zombieList;
 	std::list<Zombie*>zombiePool;
@@ -16,6 +17,7 @@ public:
 	void Enter() override;
 	void Exit() override;
 	void Update(float dt) override;
+	void Draw(sf::RenderWindow& window) override;
 
 	void SpawnZombies(int count);
 };
