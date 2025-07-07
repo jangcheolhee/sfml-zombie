@@ -62,28 +62,28 @@ void TileMap::UpdateTransform()
 void TileMap::SetPosition(const sf::Vector2f& pos)
 {
 	GameObject::SetPosition(pos);
-	position = pos;
+
 	UpdateTransform();
 }
 
 void TileMap::SetRotation(float rot)
 {
 	GameObject::SetRotation(rot);
-	rotation = rot;
+
 	UpdateTransform();
 }
 
 void TileMap::SetScale(const sf::Vector2f& s)
 {
 	GameObject::SetScale(s);
-	scale = s;
+
 	UpdateTransform();
 }
 
 void TileMap::SetOrigin(const sf::Vector2f& o)
 {
 	GameObject::SetOrigin(o);
-	origin = o;
+
 	UpdateTransform();
 }
 
@@ -117,7 +117,7 @@ void TileMap::Reset()
 {
 	texture = &TEXTURE_MGR.Get(spriteSheetId);
 	SetOrigin(Origins::MC);
-	SetRotation(45.f);
+	//SetRotation(45.f);
 	SetPosition({ 0.f,0.f });
 
 }
