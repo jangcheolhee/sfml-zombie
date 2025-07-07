@@ -2,7 +2,10 @@
 
 enum class SortingLayers
 {
-	Default,
+	Background,
+	Foreground,
+	Default,//발사체 덮어 그리는 이펙트
+	UI,
 };
 
 enum class Origins
@@ -16,6 +19,7 @@ enum class Origins
 enum class SceneIds
 {
 	None = -1,
+	Game,
 	Dev1,
 	Dev2,
 	Count,
