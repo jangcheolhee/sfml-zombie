@@ -19,6 +19,13 @@ void SceneGame::Init()
 	AddGameObject(new TileMap("TileMap"));
 
 	player = (Player*)AddGameObject(new Player("Player"));
+
+	for (int i = 0; i < 100; i++)
+	{
+		Zombie* zombie = (Zombie*)AddGameObject(new Zombie());
+		zombie->SetActive(false);
+		zombiePool.push_back(zombie);
+	}
 	Scene::Init();
 }
 
@@ -36,7 +43,8 @@ void SceneGame::Exit()
 {
 	for (Zombie* zombie : zombieList)
 	{
-		RemoveGameObject(zombie);
+		zombie->SetActive(false);
+		zombiePool.push_back(zombie);
 	}
 	zombieList.clear();
 	Scene::Exit();
@@ -61,8 +69,19 @@ void SceneGame::SpawnZombies(int count)
 {
 	for (int i = 0; i < count; i++)
 	{
-		Zombie* zombie = (Zombie*)AddGameObject(new Zombie());
-		zombie->Init();
+		Zombie* zombie = nullptr;
+		if (zombiePool.empty())
+		{
+			zombie = (Zombie*)AddGameObject(new Zombie());
+			zombie->Init();
+
+		}
+		else
+		{
+			zombie = zombiePool.front();
+			zombiePool.pop_front();
+			zombie->SetActive(true);
+		}
 		zombie->SetType((Zombie::Types)Utils::RandomRange(0, Zombie::TotalTypes));
 		zombie->Reset();
 		zombie->SetPosition(Utils::RandomInUnitCircle() * 500.f);

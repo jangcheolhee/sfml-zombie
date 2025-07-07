@@ -7,6 +7,7 @@ class SceneGame : public Scene
 protected:
 	Player* player;
 	std::list<Zombie*> zombieList;
+	std::list<Zombie*>zombiePool;
 public:
 	SceneGame();
 	~SceneGame() override = default;

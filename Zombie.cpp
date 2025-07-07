@@ -66,6 +66,8 @@ void Zombie::Reset()
 
 void Zombie::Update(float dt)
 {
+	// 일정 범위 비교 
+
 	direction = Utils::GetNormal(player->GetPosition() - GetPosition());
 	SetRotation(Utils::Angle(direction));
 	SetPosition(GetPosition() + direction * speed * dt);
