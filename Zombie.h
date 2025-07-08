@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
 
 class Player;
 
@@ -28,6 +29,7 @@ protected:
 	int hp = 0;
 
 	Player* player = nullptr;
+	HitBox hitBox;
 
 public:
 	Zombie(const std::string& name = "");
@@ -41,6 +43,16 @@ public:
 	void SetScale(const sf::Vector2f& s) override;
 	void SetOrigin(const sf::Vector2f& o) override;
 	void SetOrigin(Origins preset) override;
+
+
+	sf::FloatRect GetLocalBounds() const override
+	{
+		return body.getLocalBounds();
+	}
+	sf::FloatRect GetGlobalBounds() const override
+	{
+		return body.getGlobalBounds();
+	}
 
 	void Init() override;
 	void Release() override;
