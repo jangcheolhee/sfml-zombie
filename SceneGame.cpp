@@ -16,6 +16,8 @@ void SceneGame::Init()
 	texIds.push_back("graphics/crawler.png");
 	texIds.push_back("graphics/chaser.png");
 	texIds.push_back("graphics/crosshair.png");
+	texIds.push_back("graphics/bullet.png");
+
 	AddGameObject(new TileMap("TileMap"));
 
 	player = (Player*)AddGameObject(new Player("Player"));
@@ -61,6 +63,21 @@ void SceneGame::Update(float dt)
 
 	cursor.setPosition(ScreenToUi(InputMgr::GetMousePosition()));
 	Scene::Update(dt);
+	auto it = zombieList.begin();
+	while (it != zombieList.end())
+	{
+		if (!(*it)->GetActive())
+		{
+			zombiePool.push_back(*it);
+			it = zombieList.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+	}
+
+
 	worldView.setCenter(player->GetPosition());
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))

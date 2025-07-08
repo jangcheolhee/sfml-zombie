@@ -1,9 +1,18 @@
 #pragma once
 #include "GameObject.h"
+#include "HitBox.h"
+class SceneGame;
 class Bullet :  public GameObject
 {
 protected:
 	sf::Sprite body;
+	std::string texId = "graphics/bullet.png";
+	sf::Vector2f direction;
+	float speed = 0.f;
+	int damage = 0;
+	SceneGame* sceneGame = nullptr;
+	HitBox hitBox;
+
 public:
 	Bullet(const std::string& name = "");
 	virtual ~Bullet() = default;
@@ -22,6 +31,7 @@ public:
 	{
 		return body.getGlobalBounds();
 	}
+	void Fire(const sf::Vector2f& pos, const sf::Vector2f& dir, float s, int d);
 
 	void Init() override;
 	void Release() override;

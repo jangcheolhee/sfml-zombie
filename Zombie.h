@@ -25,7 +25,8 @@ protected:
 	int maxHp = 0;
 	float speed = 0.f;
 	int damage = 0;
-	float attackInterval = 0.f;
+	float attackInterval = 0.5f;
+	float attackTimer = 0.f;
 	int hp = 0;
 
 	Player* player = nullptr;
@@ -62,5 +63,8 @@ public:
 
 
 	void SetType(Types type);
+
+	const HitBox& GetHitBox() const { return hitBox; }
+	void OnDamage(int damage);
 };
 

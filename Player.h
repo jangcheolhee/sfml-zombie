@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "HitBox.h"
 class SceneGame;
-
+class Bullet;
 class Player : public GameObject
 {
 protected:
@@ -15,7 +15,20 @@ protected:
 
 	SceneGame* sceneGame = nullptr;
 	HitBox hitBox;
+
+	std::list <Bullet*> bulletList;
+	std::list <Bullet*> bulletPool;
+
+	float shootInterval = 0.1f;
+	float shootTimer = 0.f;
+
+	int hp = 0;
+	int maxHp = 100;
+
+
+
 public:
+	bool IsAlive() { return hp > 0; }
 	Player(const std::string& name = "");
 	~Player() override = default;
 	// GameObject을(를) 통해 상속됨
@@ -46,6 +59,10 @@ public:
 	void Update(float dt) override;
 	void Draw(sf::RenderWindow& window) override;
 
+	void Shoot();
+
+	void OnDamage(int damage);
+	const HitBox& GetHitBox() const { return hitBox; }
 
 };
 
